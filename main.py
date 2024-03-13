@@ -5,10 +5,10 @@ import person
 import observation
 
 print("\nLocation")
-location.convert()
+print(location.convert())
 print("\nPerson")
-person.convert()
+print(person.convert())
 print("\nObservation")
-observation.convert()
+print(observation.convert())
 
 

@@ -9,18 +9,21 @@ data = json.load(f)
 def convert():
 
     location_key = (
-        data["address"][0]["line"],
-        data["address"][0]["city"],
-        data["address"][0]["state"],
-        data["address"][0]["postalCode"])
+        data['address'][0]['line'],
+        data['address'][0]['city'],
+        data['address'][0]['state'],
+        data['address'][0]['postalCode'])
     new_id = id_map.create(location_key)
 
-    print("zip:        ", data["address"][0]["postalCode"])
-    print("location_id:", new_id)
-    print("address:    ", data["address"][0]["line"])
-    print("city:       ", data["address"][0]["city"])
-    print("state:      ", data["address"][0]["state"])
-    print("zip:        ", data["address"][0]["postalCode"])
+    dest = { 'location_id': None, 'address': None, 'city': None, 'state': None, 'zip': None }
+    print(dest)
 
+    dest['location_id'] = new_id
+    dest['address']     = data['address'][0]['line']
+    dest['city']        = data['address'][0]['city']
+    dest['state']       = data['address'][0]['state']
+    dest['zip']         = data['address'][0]['postalCode']
+
+    return dest
 
 
