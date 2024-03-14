@@ -1,8 +1,10 @@
-
-console.log("boo")
+#!/usr/bin/env node
 
 data = require('./input_json/patient.input.json')
-    
+
+// Shows two syntaxes for getting values out of a deep JSON structure
+
+// 1 looks like object notation    
 console.log("id:         ", data.id);
 console.log("race:       ", data.extension[0].extension[0].valueCoding.display)
 console.log("ethnicity:  ", data.extension[1].extension[0].valueCoding.display)
@@ -16,7 +18,7 @@ console.log("ethnicity vocab:  ", data.extension[1].extension[0].valueCoding.sys
 console.log("ethnicity  code:  ", data.extension[1].extension[0].valueCoding.code)
 
 console.log("----------------")
-
+// 2 looks more like using strings as keys to access a dictionary/map.
 // This is nearly exactly the pyton code. I changed print to console.log.
 console.log("id:         ", data["id"]);
 console.log("race:       ", data["extension"][0]["extension"][0]["valueCoding"]["display"])
