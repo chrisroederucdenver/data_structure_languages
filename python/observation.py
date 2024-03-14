@@ -4,7 +4,7 @@ import json
 from vocab_map_file import vocab_map
 import id_map
 
-f = open("input_json/observation.input.json")
+f = open("../input_json/observation.input.json")
 data = json.load(f)
 
 def create():

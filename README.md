@@ -22,4 +22,9 @@ I started to try and write this in Perl. I stopped because it's been a long time
 
 ## Whistle
 Google's data harmonization language, written in Java, has the disadvantage that it is a different and rare language, but it has simple paths and autovivification.
+- Java 11, (fails with Java 21 and Gradle 8)
+- Gradle 7 
+- git@github.com:GoogleCloudPlatform/healthcare-data-harmonization.git
+
+
 
