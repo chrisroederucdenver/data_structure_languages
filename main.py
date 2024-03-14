@@ -6,8 +6,10 @@ import observation
 
 print("\nLocation")
 print(location.convert())
+
 print("\nPerson")
 print(person.convert())
+
 print("\nObservation")
 print(observation.convert())
 
