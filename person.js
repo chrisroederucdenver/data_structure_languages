@@ -1,23 +1,36 @@
 #!/usr/bin/env node
 
 data = require('./input_json/patient.input.json')
+vocab = require('./vocab.json')
 
 // Shows two syntaxes for getting values out of a deep JSON structure
 
 // 1 looks like object notation    
-console.log("id:         ", data.id);
-console.log("race:       ", data.extension[0].extension[0].valueCoding.display)
-console.log("ethnicity:  ", data.extension[1].extension[0].valueCoding.display)
-console.log("gender:     ", data.gender)
-console.log("birthdate:  ", data.birthDate)
+person = {}
+person.id =  data.id;
+person.race =  data.extension[0].extension[0].valueCoding.display
+race_code =  data.extension[0].extension[0].valueCoding.code
+race_vocab =  data.extension[0].extension[0].valueCoding.system
+console.log(vocab[race_vocab])
+console.log(race_vocab)
+console.log(race_code)
+console.log(vocab[race_vocab][race_code])
+person.race_concept_id = vocab[race_vocab][race_code]
 
-console.log(" querying a db for the concept mapping requires a database behind a REST server ----------------")
-console.log("race vocab:       ", data.extension[0].extension[0].valueCoding.system)
-console.log("race  code:       ", data.extension[0].extension[0].valueCoding.code)
-console.log("ethnicity vocab:  ", data.extension[1].extension[0].valueCoding.system)
-console.log("ethnicity  code:  ", data.extension[1].extension[0].valueCoding.code)
+person.ethnicity =  data.extension[1].extension[0].valueCoding.display
+person.gender = data.gender
+person.birthdate = data.birthDate
+console.log(person)
+ 
+// demonstrating that with JS you can use variables to get inside dictionaries/objects
+console.log(vocab.gender.male)
+x='gender'
+y='male'
+console.log(vocab[x][y])
+
 
 console.log("----------------")
+
 // 2 looks more like using strings as keys to access a dictionary/map.
 // This is nearly exactly the pyton code. I changed print to console.log.
 console.log("id:         ", data["id"]);
