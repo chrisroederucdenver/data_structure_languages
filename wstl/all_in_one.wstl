@@ -1,0 +1,75 @@
+
+// Todo:
+// 1. concpet mapping/lookup
+// 2. id creation
+// 3. how to verify that $root[x] is one type or another like person or observation
+// 4. break this up into separate files
+
+var vocab_map: loadJson("vocab_map.json")
+
+// LOCATION
+    //location_key : (
+    //    $root['address'][0]['line'],
+    //    $root['address'][0]['city'],
+    //    $root['address'][0]['state'],
+    //    $root['address'][0]['postalCode'])
+    //location_id : id_map.get(location_key)
+
+    //location.location_id : location_id
+    location.address     : $root[0].address[0].line
+    location.city        : $root[0].address[0].city
+    location.state       : $root[0].address[0].state
+    location.zip         : $root[0].address[0].postalCode
+
+// PERSON
+
+    person.person_id : $root[0].id
+
+    var race_vocabulary_id : $root[0].extension[0].extension[0].valueCoding.system
+    var race_concept_code  : $root[0].extension[0].extension[0].valueCoding.code
+    var race_step_1 : values(vocab_map[where $.field == race_vocabulary_id ])[0]
+    person.race_concept_id : values(race_step_1[where $.field == race_concept_code])[0][1]
+
+    var ethnicity_vocabulary_id : $root[0].extension[1].extension[0].valueCoding.system
+    var ethnicity_concept_code  : $root[0].extension[1].extension[0].valueCoding.code
+    var eth_step_1 : values(vocab_map[where $.field == ethnicity_vocabulary_id])[0]
+    person.ethnicity_concept_id : values(eth_step_1[where $.field == ethnicity_concept_code])[0][1]
+
+    var gender_vocabulary_id :  "TODO_gender_vocab"
+    var gender : $root[0].gender
+    var gender_step_1 : values(vocab_map[where $.field == gender_vocabulary_id])[0]
+    person.gender_concept_id  : values(gender_step_1[where $.field == gender])[0][1]
+
+    person.birthdate : $root[0].birthDate
+    ///person.location_id : location_id
+
+// OBSERVATION 
+    var obs_vocabulary_id : $root[1].code.coding[0].system
+    var obs_concept_code  : $root[1].code.coding[0].code
+    var obs_step_1 : values(vocab_map[where $.field  == obs_vocabulary_id])[0]
+    person.observation_concept_id : values(obs_step_1[where $.field == obs_concept_code])[0][1]
+
+    observation.observation_id         : $root[1].id
+    observation.person_id              : $root[1].subject.reference
+    observation.observation_date       : $root[1].effectiveDateTime
+    observation.value_as_number        : 0
+    observation.value_as_string        : explicitEmptyString()
+    observation.value_as_concept_id    : 0
+    observation.provider_id            : $root[1].performer[0].reference
+
+
+
+//
+//self : {
+//    "id_map": {}, 
+//    "max_id": 0
+//}
+//
+//def create(k):
+//    self["max_id"] +: 1
+//    self["id_map"]["k"] : self["max_id"]
+//    return self["max_id"]
+//    
+//
+//def get(k):
+//    return self["id_map"]["k"]

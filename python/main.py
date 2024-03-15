@@ -4,13 +4,11 @@ import location
 import person
 import observation
 
-print("\nLocation")
-print(location.convert())
+target = {  'location': location.convert(),
+            'person': person.convert(),
+            'observation': observation.convert() }
 
-print("\nPerson")
-print(person.convert())
 
-print("\nObservation")
-print(observation.convert())
+print(target)
 
 
