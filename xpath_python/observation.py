@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 
+# observation.py
+#
+# collects OMOP patient observation (TBD) attributes from CCDA patientRole
+# depends: patient.py must be run on this document beforehand so the ID has been entered.
+# CCDA document: CCD
+
 import json
 from vocab_map_file import vocab_map
 import id_map
 
 
 def create():
-    dest = { 'observation_id': None, 'person_id': None, 'observation_concept_id': None, 'observation_date': None, 'value_as_number': None, 'value_as_string': None, 'value_as_concept_id': None, 'provider_id': None}
+    dest = { 'observation_id': None, 'person_id': None, 'observation_concept_id': None, 'observation_date': None, 
+             'value_as_number': None, 'value_as_string': None, 'value_as_concept_id': None, 
+             'provider_id': None}
     return dest
     
 def convert():

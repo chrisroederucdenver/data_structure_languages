@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+# person.py
+#
+# collects OMOP patient attributes from CCDA patientRole
+# depends: location.py must be run on this document beforehand so the ID has been entered.
+# CCDA document: CCD
+
 import json
 import id_map
 from vocab_map_file import vocab_map

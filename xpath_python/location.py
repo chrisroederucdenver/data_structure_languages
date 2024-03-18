@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+# location.py
+#
+# collects OMOP patient address attributes from CCDA patientRole
+# depends: 
+# CCDA document: CCD
+
 import json
 import id_map
 
